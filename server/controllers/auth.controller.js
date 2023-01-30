@@ -27,7 +27,7 @@ exports.registerPost = async (req, res) => {
                 password: hashedPassword
             });
             
-            res.json("Giriş kabul edildi");
+            res.json("Hasaba alyndy");
         }
         catch (err) {
             console.log(err)
@@ -48,7 +48,7 @@ exports.loginPost = async (req, res) => {
                     res.json({ error: "Ulanyjynyň nomeri ýa-da açar sözi nädogry" })
                 } else {
                     const accessToken = generateAccessToken(user.id, user.role, user.username)
-                    res.json({ token: accessToken });
+                    res.json({ success:"Giris kabul edildi", token: accessToken });
                 }
             }
         })
