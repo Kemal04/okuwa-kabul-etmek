@@ -31,6 +31,8 @@ const Login = () => {
                 if (res.data.error) {
                     toast.error(res.data.error)
                 } else {
+                    toast.success(res.data.success)
+                    navigate("/ulanyjy/maglumatlary")
                     localStorage.setItem("accessToken", res.data.token)
                     setAuthState({
                         phoneNum: res.data.phoneNum,
@@ -38,8 +40,6 @@ const Login = () => {
                         status: true,
                         role: res.data.role,
                     });
-                    toast.success(res.data.success)
-                    navigate("/")
                 }
 
             })

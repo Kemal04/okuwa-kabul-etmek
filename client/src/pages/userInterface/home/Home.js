@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../../../context/AuthContext'
 import './home.css'
 
 const Home = () => {
+
+    const { authState } = useContext(AuthContext)
+
     return (
         <div className='home-bg d-flex justify-content-center align-items-center'>
             <div className='container'>
@@ -44,8 +48,13 @@ const Home = () => {
                         </li>
                     </ul>
                     <div className='text-center mt-3'>
-                        <Link to="/hasaba-durmak" className='btn btn-outline-primary px-5 py-2 btn-lg'>Hasaba Durmak</Link>
-
+                        {
+                            !authState.status
+                                ?
+                                <Link to="/hasaba-durmak" className='btn btn-outline-primary px-5 py-2 btn-lg'>Hasaba Durmak</Link>
+                                :
+                                <Link to="/ulanyjy/maglumatlary" className='btn btn-outline-primary px-5 py-2 btn-lg'>Ulanyjy Bölümi</Link>
+                        }
                     </div>
                 </div>
             </div>
