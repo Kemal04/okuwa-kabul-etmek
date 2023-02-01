@@ -14,8 +14,10 @@ app.use(express.json());
 app.use(cors());
 
 const AuthRouter = require("./routes/auth.router")
+const DocRouter = require("./routes/doc.router")
 
 app.use("/api/auth", AuthRouter);
+app.use("/api/doc", DocRouter);
 
 //serv
 app.listen(port, () => {
