@@ -1,31 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const {userDoc} = require("../models/model")
+const {validateToken,isAdmin} = require("../middlewares/authMiddleware")
+const imageUpload = require("../helpers/file-upload")
+const multer = require("multer");
+const docController = require("../controllers/doc.controller");
 
 //all data GET 
-router.get("/",  async (req, res) => {
-    const userDocs = await userDoc.findAll();
-    res.json({
-        userDocs: userDocs
-    })
-});
-
+router.get("/", isAdmin,docController.getAll);
 
 // single GET 
-router.get("/:docId", async (req, res) => {
-    const id = req.params.docId
-    try {
-        const userDoc = await userDoc.findByPk(id);
-        if (userDoc) {
-            return res.json({
-                userDoc: userDoc
-            });
-        }
-    }
-    catch (err) {
-        console.log(err)
-    }
+router.get("/:documentId", isAdmin, docController.getSingle);
 
-});
+// document create POST
+router.post("/create", validateToken, imageUpload.upload, docController.postCreate)
+
+// delete POST 
+router.delete("/delete/:documentId", isAdmin, docController.destroy);
+
 
 module.exports = router;

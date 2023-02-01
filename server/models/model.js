@@ -28,7 +28,7 @@ const Admin = sequelize.define("admin", {
     role: { type: DataTypes.STRING, defaultValue: "Admin", allowNull: false },
 });
 
-const userDoc = sequelize.define("userdoc", {
+const userDocument = sequelize.define("user_document", {
     id: {
         type: DataTypes.INTEGER(10),
         autoIncrement: true,
@@ -38,17 +38,18 @@ const userDoc = sequelize.define("userdoc", {
     name: { type: DataTypes.STRING, allowNull: false },
     sahadatnama: { type: DataTypes.STRING, allowNull: false },
     hasiyetnama: { type: DataTypes.STRING, allowNull: false },
-    sahadatnama: { type: DataTypes.STRING, allowNull: false },
-    N69: { type: DataTypes.STRING, allowNull: false },
+    medSpravka: { type: DataTypes.STRING, allowNull: false },
     img: { type: DataTypes.STRING, allowNull: false }
 
 });
 
+User.hasOne(userDocument, {onDelete: 'CASCADE', onUpdate: 'CASCADE'});
+userDocument.belongsTo(User);
 
 Admin.findOrCreate({ where: { email: "admin@gmail.com", password: "$2b$10$.2s8SLEln9Dnql5sPuvtfec93qtcKyvMAqDY8zeLg8IcndoHNtXWS", role: "Admin" } })
 
 module.exports = {
     User,
     Admin, 
-    userDoc
+    userDocument
 };
