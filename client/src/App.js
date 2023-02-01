@@ -4,16 +4,16 @@ import axios from 'axios';
 //ROUTER
 import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom'
 
-//USERINTERFACE
-import { ProfileNavbar, ProfileSidebar } from "./components"
+//COMPONENTS
+import { AdminNavbar, AdminSidebar, ProfileNavbar, ProfileSidebar } from "./components"
 
 //USERINTERFACE
 import { Home, Register, Login } from "./pages/userInterface"
 
 //ADMIN
-import { Admin, AdminRegister, AdminLogin } from "./pages/admin"
+import { Admin, AdminLogin, AdminUsers } from "./pages/admin"
 
-//ADMIN
+//Profile
 import { ProfileDock, ProfileInfo, ProfileMessage } from "./pages/profile"
 
 //TOAST
@@ -74,11 +74,11 @@ const App = () => {
                                 {authState.role === "Admin" && (
                                     <>
                                         <Route path='/admin' element={<Admin />}></Route>
-                                        <Route path='/admin/hasaba-durmak' element={<AdminRegister />}></Route>
-                                        <Route path='/admin/giris-etmek' element={<AdminLogin />}></Route>
+                                        <Route path='/admin/users' element={<AdminUsers />}></Route>
                                     </>
                                 )}
                             </Route>
+                            <Route path='/admin/login' element={<AdminLogin />}></Route>
 
                             <Route path="/" element={<ProfileWithNavbar />}>
                                 {authState.status && (
@@ -101,7 +101,17 @@ const App = () => {
 
 const AdminWithNavbar = () => {
     return (
-        <Outlet />
+        <div className="hold-transition sidebar-mini layout-fixed">
+            <div className="wrapper">
+                <AdminNavbar />
+                <AdminSidebar />
+                <div className="content-wrapper" style={{ paddingTop: "70px" }}>
+                    <div className='content'>
+                        <Outlet />
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }
 
