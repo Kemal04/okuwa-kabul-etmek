@@ -26,8 +26,8 @@ exports.registerPost = async (req, res) => {
                 phoneNum: phoneNum,
                 password: hashedPassword
             });
-            
-            res.json("Hasaba alyndy");
+            const accessToken = generateAccessToken(user.id, user.role, user.username);
+            res.json({ success: "Hasaba alyndy", token: accessToken} );
         }
         catch (err) {
             console.log(err)

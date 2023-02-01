@@ -12,6 +12,7 @@ const sequelize = require('./data/db');
 
 app.use(express.json());
 app.use(cors());
+app.use('/', express.static('public'))
 
 const AuthRouter = require("./routes/auth.router")
 const DocRouter = require("./routes/doc.router")
