@@ -1,4 +1,4 @@
-const {userDocument} = require("../models/model")
+    const {userDocument} = require("../models/model")
 
 exports.getAll = async (req, res) => {
     const userDocs = await userDocument.findAll();
