@@ -1,4 +1,4 @@
-    const {userDocument} = require("../models/model")
+const { userDocument } = require("../models/model")
 
 exports.getAll = async (req, res) => {
     const userDocs = await userDocument.findAll();
@@ -45,6 +45,41 @@ exports.postCreate = async (req, res) => {
         console.log(err);
     }
 }
+
+exports.getEdit = async (req, res) => {
+    const id = req.params.documentId;
+    try {
+        const userDoc = await userDocument.findByPk(id);
+        if (userDoc) {
+            return res.json({
+                userDoc: userDoc
+            });
+        }
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+exports.postEdit = async (req, res) => {
+    const id = req.params.documentId;
+    const check = req.body.check;
+
+    try {
+        const userDoc = await userDocument.findByPk(id);
+        if (userDoc) {
+            userDoc.check = check;
+            userDoc.save();
+            return res.json({ success: "Ulanyjyn maglumatlary kabul edildi" });
+        }
+        res.json({ error: "Otag tapylmady" });
+
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
 
 exports.destroy = async (req, res) => {
     const id = req.params.documentId;

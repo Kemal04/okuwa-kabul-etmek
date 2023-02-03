@@ -14,8 +14,13 @@ router.get("/:documentId", isAdmin, docController.getSingle);
 // document create POST
 router.post("/create", validateToken, imageUpload.upload, docController.postCreate)
 
+// check ucin edit GET 
+router.get("/edit/:documentId", isAdmin, docController.getEdit);
+
+// check ucin edit POST 
+router.post("/edit/:documentId", isAdmin, imageUpload.upload, docController.postEdit);
+
 // delete POST 
 router.delete("/delete/:documentId", isAdmin, docController.destroy);
-
 
 module.exports = router;
