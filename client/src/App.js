@@ -11,7 +11,7 @@ import { AdminNavbar, AdminSidebar, ProfileNavbar, ProfileSidebar } from "./comp
 import { Home, Register, Login } from "./pages/userInterface"
 
 //ADMIN
-import { Admin, AdminLogin, AdminUsers } from "./pages/admin"
+import { Admin, AdminLogin, AdminUserDoc, AdminUserDocEdit, AdminUsers } from "./pages/admin"
 
 //Profile
 import { ProfileDock, ProfileInfo, ProfileMessage } from "./pages/profile"
@@ -52,7 +52,7 @@ const App = () => {
                 });
             }
         });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -76,6 +76,8 @@ const App = () => {
                                     <>
                                         <Route path='/admin' element={<Admin />}></Route>
                                         <Route path='/admin/users' element={<AdminUsers />}></Route>
+                                        <Route path='/admin/user-doc' element={<AdminUserDoc />}></Route>
+                                        <Route path='/admin/user-doc/edit/:id' element={<AdminUserDocEdit />}></Route>
                                     </>
                                 )}
                             </Route>
