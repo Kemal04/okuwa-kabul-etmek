@@ -16,9 +16,11 @@ app.use('/', express.static('public'))
 
 const AuthRouter = require("./routes/auth.router")
 const DocRouter = require("./routes/doc.router")
+const UserRouter = require("./routes/user.router")
 
 app.use("/api/auth", AuthRouter);
 app.use("/api/doc", DocRouter);
+app.use("/api/user", UserRouter);
 
 //serv
 app.listen(port, () => {

@@ -39,7 +39,8 @@ const userDocument = sequelize.define("user_document", {
     sahadatnama: { type: DataTypes.STRING, allowNull: false },
     hasiyetnama: { type: DataTypes.STRING, allowNull: false },
     medSpravka: { type: DataTypes.STRING, allowNull: false },
-    img: { type: DataTypes.STRING, allowNull: false }
+    img: { type: DataTypes.STRING, allowNull: false },
+    check: {type: DataTypes.TINYINT, allowNull: false, defaultValue: "0"}
 
 });
 
