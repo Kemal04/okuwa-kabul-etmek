@@ -51,7 +51,7 @@ const AdminSidebar = () => {
                                 </NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to="/admin/user-data" className="nav-link">
+                                <NavLink to="/admin/user-doc" className="nav-link">
                                     <p> User Informations </p>
                                 </NavLink>
                             </li>
