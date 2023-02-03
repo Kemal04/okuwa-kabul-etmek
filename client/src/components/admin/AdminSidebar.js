@@ -1,26 +1,9 @@
-import { React, useEffect, useContext, useState } from 'react';
-import { AuthContext } from '../../context/AuthContext';
+import { React } from 'react';
 import { Link, NavLink } from 'react-router-dom'
-import axios from "axios"
+import { faBook, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const AdminSidebar = () => {
-
-    const { authState } = useContext(AuthContext)
-
-    const id = authState.id
-
-    const [user, setUser] = useState("");
-
-    useEffect(() => {
-        axios.get(`http://localhost:3001/api/auth/basicinfo/${id}`, {
-            headers: {
-                accessToken: localStorage.getItem("accessToken"),
-            },
-        }).then((res) => {
-            setUser(res.data);
-        });
-    }, [id]);
-
     return (
         <>
             <aside className="main-sidebar sidebar-dark-primary elevation-4">
@@ -30,7 +13,7 @@ const AdminSidebar = () => {
                             <img src="/img/icons/user.svg" className="img-circle elevation-2" alt='user' />
                         </div>
                         <div className="info">
-                            <Link to="/" className="d-block text-decoration-none">{user.username}</Link>
+                            <Link to="/" className="d-block text-decoration-none">Administrasiýa</Link>
                         </div>
                     </div>
 
@@ -47,16 +30,19 @@ const AdminSidebar = () => {
                         <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <li className="nav-item">
                                 <NavLink to="/admin/users" className="nav-link">
+                                    <FontAwesomeIcon icon={faUser} className="me-2"/>
                                     <p> Users </p>
                                 </NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink to="/admin/user-doc" className="nav-link">
+                                    <FontAwesomeIcon icon={faBook} className="me-2"/>
                                     <p> User Informations </p>
                                 </NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink to="/admin/messages" className="nav-link">
+                                    <FontAwesomeIcon icon={faEnvelope} className="me-2"/>
                                     <p> Habarlar </p>
                                 </NavLink>
                             </li>
