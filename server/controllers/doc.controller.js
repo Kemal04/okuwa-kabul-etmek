@@ -29,21 +29,31 @@ exports.postCreate = async (req, res) => {
     const hasiyetnama = req.files.hasiyetnama[0].filename;
     const medSpravka = req.files.medSpravka[0].filename;
     const userId = req.user.id;
-
-    try {
-        await userDocument.create({
-            name: name,
-            img: img,
-            sahadatnama: sahadatnama,
-            hasiyetnama: hasiyetnama,
-            medSpravka: medSpravka,
+    const document = await userDocument.findOne({
+        where: {
             userId: userId
-        });
-        res.json({ success: "Dokumentleriniz üstünlikli ugradyldy" })
+        }
+    })
+    if (!document) {
+        try {
+            await userDocument.create({
+                name: name,
+                img: img,
+                sahadatnama: sahadatnama,
+                hasiyetnama: hasiyetnama,
+                medSpravka: medSpravka,
+                userId: userId
+            });
+            res.json({ success: "Dokumentleriniz üstünlikli ugradyldy" })
+        }
+        catch (err) {
+            console.log(err);
+        }
+
+    } else {
+        res.json({ error: "Siz on maglumatlarynyzy ugratdynyz" })
     }
-    catch (err) {
-        console.log(err);
-    }
+
 }
 
 exports.getEdit = async (req, res) => {
@@ -80,6 +90,27 @@ exports.postEdit = async (req, res) => {
     }
 }
 
+exports.docDestroy = async (req, res) => {
+    const id = req.params.documentId;
+    const userId = req.user.id;
+
+    try {
+        const document = await userDocument.findOne({
+            where: {
+                id: id,
+                userId: userId
+            }
+        });
+        if (document) {
+            await document.destroy();
+            return res.json({ success: "Sizin maglumatlarynyz üstünlikli pozuldy" });
+        }
+        res.json({ error: "Maglumatlarynyz tapylmady" })
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
 
 exports.destroy = async (req, res) => {
     const id = req.params.documentId;
