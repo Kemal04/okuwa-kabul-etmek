@@ -20,7 +20,10 @@ router.get("/edit/:documentId", isAdmin, docController.getEdit);
 // check ucin edit POST 
 router.post("/edit/:documentId", isAdmin, imageUpload.upload, docController.postEdit);
 
-// delete POST 
+// User ucin delete POST 
+router.delete("/user/delete/:documentId", validateToken, docController.docDestroy);
+
+// Admin ucin delete POST 
 router.delete("/delete/:documentId", isAdmin, docController.destroy);
 
 module.exports = router;
